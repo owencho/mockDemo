@@ -6,34 +6,37 @@ void heaterController(HeaterState * state){
     int sw;
     sw = *state;
     switch (sw) {
-      case IDLE_STATE: heaterTurn(ON);
+        case IDLE_STATE: heaterTurn(ON);
                         *state = HEATING_STATE;
-                       break;
-     case STABLE_STATE:
+                        break;
+        case STABLE_STATE:
                         a = readTemperature();
                         if(a > 90 ){
                           heaterTurn(OFF);
                           *state = IDLE_STATE;
                         }
-                        else if(a <= 60 && a < 90){
+                        else if(a >= 60 && a < 90){
                           *state = STABLE_STATE;
                         }
                         else{
                           *state = HEATING_STATE;
                         }
                         break;
-    case HEATING_STATE:
+        case HEATING_STATE:
                        a = readTemperature();
                        if(a > 90 ){
                          heaterTurn(OFF);
                           *state = IDLE_STATE;
                        }
-                       else if(a <= 60 && a <= 90){
+                       else if(a >= 60 && a < 90){
                          *state = STABLE_STATE;
                        }
                        else{
                          *state = HEATING_STATE;
                        }
                        break;
+        default:
+                        *state = IDLE_STATE;
+                        break;
     }
 }
