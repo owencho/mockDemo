@@ -1,8 +1,7 @@
 #include "unity.h"
-#include "mock_heater.h"
-#include "heaterController.h"
-#include "type.h"
-#include "heater.h"
+#include "mock_Heater.h"
+#include "HeaterController.h"
+#include "Type.h"
 
 void setUp(void){}
 void tearDown(void){}

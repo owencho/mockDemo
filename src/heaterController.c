@@ -1,4 +1,4 @@
-#include "heaterController.h"
+#include "HeaterController.h"
 #include "unity.h"
 
 void heaterController(HeaterState * state){
