@@ -5,6 +5,7 @@ typedef enum {
     IDLE_STATE,
     HEATING_STATE,
     STABLE_STATE,
+    INIT_STATE,
 } HeaterState ;
 
 typedef enum {

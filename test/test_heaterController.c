@@ -7,10 +7,38 @@
 void setUp(void){}
 void tearDown(void){}
 
+void test_heaterController_init_to_heating_state(void){
+    HeaterSwitch powerSwitch = ON;
+    HeaterState state;
+    state = INIT_STATE;
+    heaterTurn_Expect(powerSwitch);
+    heaterController(&state);
+    TEST_ASSERT_EQUAL(HEATING_STATE, state);
+}
+
+void test_heaterController_idle_to_stable_state(void){
+    HeaterSwitch powerSwitch = ON;
+    HeaterState state;
+    state = IDLE_STATE;
+    readTemperature_ExpectAndReturn(71.3);
+    heaterTurn_Expect(powerSwitch);
+    heaterController(&state);
+    TEST_ASSERT_EQUAL(STABLE_STATE, state);
+}
+
+void test_heaterController_remain_idle_state(void){
+    HeaterState state;
+    state = IDLE_STATE;
+    readTemperature_ExpectAndReturn(100.2);
+    heaterController(&state);
+    TEST_ASSERT_EQUAL(IDLE_STATE, state);
+}
+
 void test_heaterController_idle_to_heating_state(void){
     HeaterSwitch powerSwitch = ON;
     HeaterState state;
     state = IDLE_STATE;
+    readTemperature_ExpectAndReturn(30);
     heaterTurn_Expect(powerSwitch);
     heaterController(&state);
     TEST_ASSERT_EQUAL(HEATING_STATE, state);
